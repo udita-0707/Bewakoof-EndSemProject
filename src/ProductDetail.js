@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const ProductDetail = ({ products }) => {
     const { productId } = useParams();
     const product = products.find(p => p._id === productId);
+    const productDescription = parse(product.description);
 
     if (!product) {
         return <p>Product not found</p>;
@@ -20,7 +22,7 @@ const ProductDetail = ({ products }) => {
                     <div className="font-bold text-lg mb-1">{product.name}</div>
                     <p className="text-gray-700 text-sm">{product.subCategory}</p>
                     <p className="text-gray-900 text-base font-semibold">{product.price} INR</p>
-                    <p className="text-gray-700 text-base">{product.description}</p>
+                    <p className="text-gray-700 text-base">{productDescription}</p>
                 </div>
             </div>
         </div>
